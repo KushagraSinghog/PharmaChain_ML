@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PharmaChain — AI/ML Risk Monitoring & Anomaly Detection</title>
+  <meta name="description" content="PharmaChain Machine Learning Anomaly Detection, Behavioral Velocity Profiling & Geospatial Clustering Engine">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Top Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">🤖</div>
+        <div>
+          <h1>PharmaChain ML Risk Monitoring</h1>
+          <p>Secondary Behavioral Intelligence & Counterfeit Anomaly Detection Engine</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>Inference Engine Active</span>
+        </div>
+        <a href="/docs" target="_blank" class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;">OpenAPI Docs</a>
+      </div>
+    </header>
+
+    <!-- Top KPI Grid -->
+    <div class="kpi-grid">
+      <div class="kpi-card critical">
+        <div class="kpi-title">Critical Alerts</div>
+        <div class="kpi-value" id="kpi-critical" style="color: var(--risk-critical);">0</div>
+        <div class="kpi-subtitle">Immediate Review Required</div>
+      </div>
+
+      <div class="kpi-card high">
+        <div class="kpi-title">High Risk Flagged</div>
+        <div class="kpi-value" id="kpi-high" style="color: var(--risk-high);">0</div>
+        <div class="kpi-subtitle">Investigation Recommended</div>
+      </div>
+
+      <div class="kpi-card medium">
+        <div class="kpi-title">Medium Risk (Monitored)</div>
+        <div class="kpi-value" id="kpi-medium" style="color: var(--risk-med);">0</div>
+        <div class="kpi-subtitle">Sub-Threshold Anomalies</div>
+      </div>
+
+      <div class="kpi-card low">
+        <div class="kpi-title">Total Processed Events</div>
+        <div class="kpi-value" id="kpi-total-events" style="color: var(--risk-low);">0</div>
+        <div class="kpi-subtitle">Intake, Sale & Scans</div>
+      </div>
+
+      <div class="kpi-card drift">
+        <div class="kpi-title">Model Health (B9 PSI)</div>
+        <div class="kpi-value" style="font-size: 20px; color: var(--accent-cyan);">
+          <span id="kpi-drift-status" class="badge LOW">STABLE</span>
+        </div>
+        <div class="kpi-subtitle" id="kpi-drift-psi">PSI: 0.00</div>
+      </div>
+    </div>
+
+    <!-- Live Demo Attack Simulator -->
+    <div class="simulator-panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>⚡ Live Counterfeit & Anomaly Simulator</span>
+          <span style="font-size: 12px; color: var(--text-muted); font-weight: normal;">(Demonstrate live detector response in real-time)</span>
+        </div>
+        <button class="btn btn-outline" onclick="clearStore()">🧹 Reset Store</button>
+      </div>
+      <div class="sim-buttons">
+        <button class="btn btn-primary" onclick="triggerSimulation('impossible_travel')">
+          🚀 1. Impossible Travel Attack (Delhi &rarr; Jaipur in 8m)
+        </button>
+        <button class="btn btn-primary" onclick="triggerSimulation('clone_burst')">
+          👥 2. Cloned QR Burst Replay (15 Scans / Multi-City)
+        </button>
+        <button class="btn btn-primary" onclick="triggerSimulation('route_backward_jump')">
+          🔄 3. Route Infiltration Jump (Chemist &rarr; Warehouse)
+        </button>
+        <button class="btn btn-secondary" onclick="triggerSimulation('inventory_hoarding')">
+          📦 4. Pharmacy Inventory Hoarding (25 Bulk Intake / 0 Sales)
+        </button>
+        <button class="btn btn-secondary" onclick="triggerSimulation('complaint_burst')">
+          📍 5. DBSCAN Hotspot (6 Consumer Reports in Jaipur)
+        </button>
+        <button class="btn btn-success" onclick="triggerSimulation('normal_flow')">
+          🟢 6. Normal Supply Flow (Genuine Lifecycle)
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Section Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Left Column: Anomaly Feed -->
+      <div>
+        <div class="card">
+          <div class="panel-header">
+            <div class="panel-title">🚨 Real-Time Anomaly & Investigation Feed</div>
+            <span style="font-size: 12px; color: var(--text-muted);">Auto-updating every 4s</span>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Risk Score</th>
+                  <th>Pack Hash</th>
+                  <th>Batch ID</th>
+                  <th>Shop ID</th>
+                  <th>Triggered Anomalies</th>
+                </tr>
+              </thead>
+              <tbody id="anomalies-tbody">
+                <tr>
+                  <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">
+                    No anomalies detected yet. Use the simulator above to test fraud scenarios.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Simulation Live Console -->
+        <div class="card">
+          <div class="panel-header">
+            <div class="panel-title">💻 Telemetry & Simulation Console</div>
+          </div>
+          <div class="console-log" id="sim-console">
+[Ready] PharmaChain ML Layer initialized. Ready to process events.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: DBSCAN Clusters & Model Health -->
+      <div>
+        <!-- DBSCAN Hotspots -->
+        <div class="card">
+          <div class="panel-header">
+            <div class="panel-title">📍 DBSCAN Complaint Clusters (A5)</div>
+          </div>
+          <div id="clusters-container">
+            <div style="color: var(--text-muted); font-size: 13px;">No active complaint hotspots detected.</div>
+          </div>
+        </div>
+
+        <!-- B9 Model Drift Diagnosis -->
+        <div class="card">
+          <div class="panel-header">
+            <div class="panel-title">📉 Model Drift Diagnostics (B9)</div>
+          </div>
+          <div style="font-size: 13px; margin-bottom: 12px; color: var(--text-muted);">
+            Evaluates Population Stability Index (PSI) comparing training distribution against active inference scores.
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <div style="font-size: 12px; margin-bottom: 6px;">
+              <strong>Diagnostic Status:</strong>
+            </div>
+            <div id="drift-recommendation" style="font-size: 12px; color: #a7f3d0;">
+              Model parameters stable. Inference aligns with baseline.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>
